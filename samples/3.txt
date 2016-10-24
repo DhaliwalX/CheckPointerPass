@@ -1,9 +1,13 @@
 ../samples/3.c:7:5: warning: expression result unused [-Wunused-value]
         x->a;
         ~  ^
-CheckPointerPass: [start]: main
+CheckPointerPass: [funct]: main
+>> CheckPointerPass: [block]: 0: entry
+
 POINTER x
 DEREF * x
 DEREF a x
-CheckPointerPass: [  end]: main
+
+<< CheckPointerPass: [block]: 0: entry
+CheckPointerPass: [funct]: main
 1 warning generated.

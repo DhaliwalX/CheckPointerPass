@@ -1,0 +1,30 @@
+CheckPointerPass: [funct]: main
+>> CheckPointerPass: [block]: 0: entry
+
+POINTER b
+
+<< CheckPointerPass: [block]: 0: entry
+>> CheckPointerPass: [block]: 1: while.cond
+
+DEREF * b
+
+<< CheckPointerPass: [block]: 1: while.cond
+>> CheckPointerPass: [block]: 2: while.body
+
+DEREF * b
+
+<< CheckPointerPass: [block]: 2: while.body
+>> CheckPointerPass: [block]: 3: if.then
+
+DEREF * b
+
+<< CheckPointerPass: [block]: 3: if.then
+>> CheckPointerPass: [block]: 4: if.end
+
+
+<< CheckPointerPass: [block]: 4: if.end
+>> CheckPointerPass: [block]: 5: while.end
+
+
+<< CheckPointerPass: [block]: 5: while.end
+CheckPointerPass: [funct]: main

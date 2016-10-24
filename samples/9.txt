@@ -1,0 +1,20 @@
+CheckPointerPass: [funct]: add
+>> CheckPointerPass: [block]: 0: entry
+
+POINTER x.addr
+POINTER y.addr
+DEREF * x.addr
+DEREF * y.addr
+
+<< CheckPointerPass: [block]: 0: entry
+CheckPointerPass: [funct]: add
+CheckPointerPass: [funct]: main
+>> CheckPointerPass: [block]: 0: entry
+
+POINTER aptr
+POINTER bptr
+DEREF * aptr
+DEREF * bptr
+
+<< CheckPointerPass: [block]: 0: entry
+CheckPointerPass: [funct]: main

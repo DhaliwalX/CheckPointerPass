@@ -1,3 +1,7 @@
-CheckPointerPass: [start]: main
+CheckPointerPass: [funct]: main
+>> CheckPointerPass: [block]: 0: entry
+
 POINTER b
-CheckPointerPass: [  end]: main
+
+<< CheckPointerPass: [block]: 0: entry
+CheckPointerPass: [funct]: main

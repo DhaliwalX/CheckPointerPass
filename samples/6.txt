@@ -1,0 +1,31 @@
+CheckPointerPass: [funct]: main
+>> CheckPointerPass: [block]: 0: entry
+
+POINTER b
+DEREF * b
+
+<< CheckPointerPass: [block]: 0: entry
+>> CheckPointerPass: [block]: 1: if.then
+
+DEREF * b
+
+<< CheckPointerPass: [block]: 1: if.then
+>> CheckPointerPass: [block]: 2: if.else
+
+DEREF * b
+
+<< CheckPointerPass: [block]: 2: if.else
+>> CheckPointerPass: [block]: 3: if.then2
+
+DEREF * b
+
+<< CheckPointerPass: [block]: 3: if.then2
+>> CheckPointerPass: [block]: 4: if.end
+
+
+<< CheckPointerPass: [block]: 4: if.end
+>> CheckPointerPass: [block]: 5: if.end3
+
+
+<< CheckPointerPass: [block]: 5: if.end3
+CheckPointerPass: [funct]: main

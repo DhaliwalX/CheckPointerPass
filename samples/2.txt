@@ -1,8 +1,12 @@
 ../samples/2.c:5:2: warning: expression result unused [-Wunused-value]
         *b;
         ^~
-CheckPointerPass: [start]: main
+CheckPointerPass: [funct]: main
+>> CheckPointerPass: [block]: 0: entry
+
 POINTER b
 DEREF * b
-CheckPointerPass: [  end]: main
+
+<< CheckPointerPass: [block]: 0: entry
+CheckPointerPass: [funct]: main
 1 warning generated.
