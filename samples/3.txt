@@ -1,0 +1,9 @@
+../samples/3.c:7:5: warning: expression result unused [-Wunused-value]
+        x->a;
+        ~  ^
+CheckPointerPass: [start]: main
+POINTER x
+DEREF * x
+DEREF a x
+CheckPointerPass: [  end]: main
+1 warning generated.

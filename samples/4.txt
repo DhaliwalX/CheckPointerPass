@@ -1,0 +1,19 @@
+../samples/4.c:12:5: warning: expression result unused [-Wunused-value]
+        x->z;
+        ~  ^
+../samples/4.c:13:8: warning: expression result unused [-Wunused-value]
+        x->z->a;
+        ~~~~  ^
+CheckPointerPass: [start]: main
+POINTER x
+DEREF * x
+DEREF z x
+POINTER z
+DEREF * z
+DEREF * x
+DEREF z1 x
+POINTER z1
+DEREF * z1
+DEREF a z1
+CheckPointerPass: [  end]: main
+2 warnings generated.

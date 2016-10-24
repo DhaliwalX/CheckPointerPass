@@ -1,0 +1,3 @@
+CheckPointerPass: [start]: main
+POINTER b
+CheckPointerPass: [  end]: main
