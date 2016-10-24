@@ -12,13 +12,16 @@ Fetching Source Code
 ====================--------------------------------------------
 
     1) Fetch the LLVM source code using git
-            git clone --depth 5 https://github.com/llvm-mirror/llvm.git
+
+        git clone --depth 5 https://github.com/llvm-mirror/llvm.git
 
     2) Fetch the clang source code in llvm/projects directory
-            git clone --depth 5 https://github.com/llvm-mirror/clang.git
+
+        git clone --depth 5 https://github.com/llvm-mirror/clang.git
 
     3) Fetch the CheckPointerPass in a separate directory.
-            git clone https://github.com/princedhaliwal/CheckPointerPass
+
+        git clone https://github.com/princedhaliwal/CheckPointerPass
 
 
 Compiling Source Code
@@ -26,28 +29,32 @@ Compiling Source Code
 
     1) First build and install LLVM libraries
 
-            cd llvm
-            mkdir build
-            cd build
-            cmake ..
-            cmake --build .
-            make install        # required for using clang from command line
+        cd llvm
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build .
+        make install        # required for using clang from command line
 
     2) Build CheckPointerPass (CheckPointerPass can live out of LLVM directory)
 
-            cd CheckPointerPass
-            mkdir build
-            cd build
-            cmake -DLLVM_ROOT={path to llvm directory}/build ..
-            make install
+        cd CheckPointerPass
+        mkdir build
+        cd build
+        cmake -DLLVM_ROOT={path to llvm directory}/build ..
+        make install
 
     3) Running CheckPointerPass
 
-            clang -Xclang -load -Xclang ./checkpointer/libCheckPointerPass.so /path/to/file.c -lstdc++
+        clang -Xclang -load -Xclang ./checkpointer/libCheckPointerPass.so \
+                 /path/to/file.c -lstdc++
 
 
 Examples
 =============---------------------------------------------------
+
+All these examples are tested using clang-4.0 on Ubuntu 16.04.
+Warnings are omitted from the output.
 
 Program 1 (Creating a pointer):
     
