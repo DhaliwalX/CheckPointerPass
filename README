@@ -4,157 +4,157 @@ Prerequisites:
 
 Following are the prerequisutes for building CheckPointerPass.
 
-	1) Git - for fetching source code
-	2) g++ - for compiling
-	3) cmake - for generating build files
+    1) Git - for fetching source code
+    2) g++ - for compiling
+    3) cmake - for generating build files
 
 Fetching Source Code
 ====================--------------------------------------------
 
-	1) Fetch the LLVM source code using git
-			git clone --depth 5 https://github.com/llvm-mirror/llvm.git
+    1) Fetch the LLVM source code using git
+            git clone --depth 5 https://github.com/llvm-mirror/llvm.git
 
-	2) Fetch the clang source code in llvm/projects directory
-			git clone --depth 5 https://github.com/llvm-mirror/clang.git
+    2) Fetch the clang source code in llvm/projects directory
+            git clone --depth 5 https://github.com/llvm-mirror/clang.git
 
-	3) Fetch the CheckPointerPass in a separate directory.
-			git clone https://github.com/princedhaliwal/CheckPointerPass
+    3) Fetch the CheckPointerPass in a separate directory.
+            git clone https://github.com/princedhaliwal/CheckPointerPass
 
 
 Compiling Source Code
 =====================-------------------------------------------
 
-	1) First build and install LLVM libraries
+    1) First build and install LLVM libraries
 
-			cd llvm
-			mkdir build
-			cd build
-			cmake ..
-			cmake --build .
-			make install 		# required for using clang from command line
+            cd llvm
+            mkdir build
+            cd build
+            cmake ..
+            cmake --build .
+            make install        # required for using clang from command line
 
-	2) Build CheckPointerPass (CheckPointerPass can live out of LLVM directory)
+    2) Build CheckPointerPass (CheckPointerPass can live out of LLVM directory)
 
-			cd CheckPointerPass
-			mkdir build
-			cd build
-			cmake -DLLVM_ROOT={path to llvm directory}/build ..
-			make install
+            cd CheckPointerPass
+            mkdir build
+            cd build
+            cmake -DLLVM_ROOT={path to llvm directory}/build ..
+            make install
 
-	3) Running CheckPointerPass
+    3) Running CheckPointerPass
 
-			clang -Xclang -load -Xclang ./checkpointer/libCheckPointerPass.so /path/to/file.c -lstdc++
+            clang -Xclang -load -Xclang ./checkpointer/libCheckPointerPass.so /path/to/file.c -lstdc++
 
 
 Examples
 =============---------------------------------------------------
 
 Program 1 (Creating a pointer):
-	
-	int main() {
-		int a = 10;
-		int *b = &a;
-	}
+    
+    int main() {
+        int a = 10;
+        int *b = &a;
+    }
 
 Output 1:
 
-	CheckPointerPass: [start]: main
-	POINTER b
-	CheckPointerPass: [  end]: main
+    CheckPointerPass: [start]: main
+    POINTER b
+    CheckPointerPass: [  end]: main
 
 
 Program 2 (Dereferencing a pointer):
-	
-	int main() {
-		int a = 10;
-		int *b = &a;
+    
+    int main() {
+        int a = 10;
+        int *b = &a;
 
-		*b;
-	}
+        *b;
+    }
 
 Output 2:
 
-	CheckPointerPass: [start]: main
-	POINTER b
-	DEREF * b
-	CheckPointerPass: [  end]: main
+    CheckPointerPass: [start]: main
+    POINTER b
+    DEREF * b
+    CheckPointerPass: [  end]: main
 
 
 Program 3:
 
-	struct foo {
-		int a;
-	};
+    struct foo {
+        int a;
+    };
 
-	int main() {
-		struct foo *x;
-		x->a;
-	}
+    int main() {
+        struct foo *x;
+        x->a;
+    }
 
 Output 3 (Compiler warnings omitted):
 
-	CheckPointerPass: [start]: main
-	POINTER x
-	DEREF * x
-	DEREF a x
-	CheckPointerPass: [  end]: main
+    CheckPointerPass: [start]: main
+    POINTER x
+    DEREF * x
+    DEREF a x
+    CheckPointerPass: [  end]: main
 
 
 Program 4:
-	
-	struct foo {
-		int a;
-	};
+    
+    struct foo {
+        int a;
+    };
 
-	struct bar {
-		struct foo *z;
-	};
+    struct bar {
+        struct foo *z;
+    };
 
-	int main() {
-		struct bar *x;
-		x->z;
-		x->z->a;
-	}
+    int main() {
+        struct bar *x;
+        x->z;
+        x->z->a;
+    }
 
 Output 4:
 
-	CheckPointerPass: [start]: main
-	POINTER x
-	DEREF * x
-	DEREF z x
-	POINTER z
-	DEREF * z
-	DEREF * x
-	DEREF z1 x
-	POINTER z1
-	DEREF * z1
-	DEREF a z1
-	CheckPointerPass: [  end]: main
+    CheckPointerPass: [start]: main
+    POINTER x
+    DEREF * x
+    DEREF z x
+    POINTER z
+    DEREF * z
+    DEREF * x
+    DEREF z1 x
+    POINTER z1
+    DEREF * z1
+    DEREF a z1
+    CheckPointerPass: [  end]: main
 
 
 Program 5:
-	
-	struct foo {
-		int a;
-	};
+    
+    struct foo {
+        int a;
+    };
 
-	struct bar {
-		struct foo z;
-	};
+    struct bar {
+        struct foo z;
+    };
 
-	int main() {
-		struct bar *x;
-		x->z;
-		x->z.a;
-	}
+    int main() {
+        struct bar *x;
+        x->z;
+        x->z.a;
+    }
 
 Output 5:
-	
-	CheckPointerPass: [start]: main
-	POINTER x
-	DEREF * x
-	DEREF z x
-	DEREF * x
-	DEREF z1 x
-	CheckPointerPass: [  end]: main
+    
+    CheckPointerPass: [start]: main
+    POINTER x
+    DEREF * x
+    DEREF z x
+    DEREF * x
+    DEREF z1 x
+    CheckPointerPass: [  end]: main
 
