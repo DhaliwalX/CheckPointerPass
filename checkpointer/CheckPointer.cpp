@@ -17,6 +17,9 @@ struct CheckPointerPass : public FunctionPass {
   virtual bool runOnFunction(Function &function) override {
     int blocks = 0;
     errs() << "CheckPointerPass: [funct]: " << function.getName() << "\n";
+    errs() << "===========================================================\n";
+    function.dump();
+    errs() << "===========================================================\n";
 
     // traverse each block in a function
     for (auto &block : function) {
