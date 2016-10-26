@@ -6,15 +6,11 @@ if( NOT EXISTS ${LLVM_ROOT}/include/llvm )
 	message(FATAL_ERROR "LLVM_ROOT (${LLVM_ROOT}) is not a valid LLVM install. Please specify LLVM_ROOT (build directory where LLVM lives).")
 endif()
 
-message(STATUS "LLVM_ROOT (${LLVM_ROOT})")
-
-find_package(LLVM REQUIRED CONFIG)
-
-message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
-message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
-message(STATUS "Looking for LLVM cmake modules: ${LLVM_ROOT}/lib/cmake/llvm")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${LLVM_ROOT}/lib/cmake/llvm")
 include(LLVMConfig)
+message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+message(STATUS "Using LLVMConfig.cmake in: ${LLVM_ROOT}/lib/cmake/llvm")
+message(STATUS "Looking for LLVM cmake modules: ${LLVM_ROOT}/lib/cmake/llvm")
 include_directories("${LLVM_ROOT}/include")
 link_directories("${LLVM_ROOT}/lib")
 
