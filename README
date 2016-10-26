@@ -34,7 +34,7 @@ Compiling Source Code
         cd build
         cmake ..
         cmake --build .
-        make install        # required for using clang from command line
+        make install        # required for using clang from command line 
 
     2) Build CheckPointerPass (CheckPointerPass can live out of LLVM directory)
 
@@ -42,7 +42,8 @@ Compiling Source Code
         mkdir build
         cd build
         cmake -DLLVM_ROOT={path to llvm directory}/build ..
-        make install
+        make
+        make install        # if you want to install it locally
 
     3) Running CheckPointerPass
 
